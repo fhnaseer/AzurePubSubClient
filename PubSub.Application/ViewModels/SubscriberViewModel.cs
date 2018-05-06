@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows.Input;
 using PubSub.Model;
 
@@ -9,7 +10,7 @@ namespace PubSub.Application.ViewModels
         private ICommand _registerSubscriberCommand;
         public ICommand RegisterSubscriberCommand => _registerSubscriberCommand ?? (_registerSubscriberCommand = new RelayCommand(RegisterSubscriber));
 
-        internal void RegisterSubscriber()
+        private void RegisterSubscriber()
         {
         }
 
@@ -32,8 +33,17 @@ namespace PubSub.Application.ViewModels
 
         internal bool CanExecuteFunction() { return SelectedFunction != null; }
 
-        internal void ExecuteFunction()
+        private void ExecuteFunction()
         {
+        }
+
+        private readonly StringBuilder _subscriberText = new StringBuilder();
+        public string SubscriberText => _subscriberText.ToString();
+
+        private void AppendText(string nextLine)
+        {
+            _subscriberText.AppendLine(nextLine);
+            OnPropertyChanged(nameof(SubscriberText));
         }
     }
 }
