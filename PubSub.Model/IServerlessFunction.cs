@@ -1,11 +1,13 @@
-﻿namespace PubSub.Model
+﻿using System.Threading.Tasks;
+
+namespace PubSub.Model
 {
     public interface IServerlessFunction
     {
-        string Name { get; set; }
+        string Name { get; }
 
-        string FunctionAddress { get; set; }
+        string FunctionAddress { get; }
 
-        object ExecuteFunction(object parameters);
+        Task<string> ExecuteFunction(object parameters);
     }
 }

@@ -1,10 +1,18 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using PubSub.Model;
 
 namespace PubSub.Application.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        private AzureContext _azureContext;
+        public AzureContext AzureContext
+        {
+            get => _azureContext ?? (_azureContext = new AzureContext(string.Empty));
+            set => _azureContext = value;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]

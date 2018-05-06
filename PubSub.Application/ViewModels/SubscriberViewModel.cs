@@ -10,8 +10,10 @@ namespace PubSub.Application.ViewModels
         private ICommand _registerSubscriberCommand;
         public ICommand RegisterSubscriberCommand => _registerSubscriberCommand ?? (_registerSubscriberCommand = new RelayCommand(RegisterSubscriber));
 
-        private void RegisterSubscriber()
+        private async void RegisterSubscriber()
         {
+            var response = await AzureContext.RegisterSubscriberFunction.ExecuteFunction(null);
+            AppendText(response);
         }
 
         private ObservableCollection<IServerlessFunction> _functions;

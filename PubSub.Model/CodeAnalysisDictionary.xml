@@ -9,6 +9,7 @@
     <Recognized>
       <Word>paani</Word>
       <Word>Serverless</Word>
+      <Word>Api</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate="EnterpriseServices">ComPlus</Term>
