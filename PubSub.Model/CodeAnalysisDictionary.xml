@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Unrecognized>
+    </Unrecognized>
+    <Compound>
+      <Term>fhnaseer</Term>
+    </Compound>
+    <Recognized>
+      <Word>paani</Word>
+      <Word>Serverless</Word>
+    </Recognized>
+    <Deprecated>
+      <Term PreferredAlternate="EnterpriseServices">ComPlus</Term>
+    </Deprecated>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>fhnaseer</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

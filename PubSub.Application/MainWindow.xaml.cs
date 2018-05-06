@@ -1,6 +1,6 @@
-﻿using PubSubClient.ViewModels;
+﻿using PubSub.Application.ViewModels;
 
-namespace PubSubClient
+namespace PubSub.Application
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

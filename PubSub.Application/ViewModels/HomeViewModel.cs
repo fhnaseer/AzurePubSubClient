@@ -1,4 +1,4 @@
-﻿namespace PubSubClient.ViewModels
+﻿namespace PubSub.Application.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {

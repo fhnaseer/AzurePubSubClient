@@ -1,4 +1,4 @@
-﻿namespace PubSubClient
+﻿namespace PubSub.Application
 {
     /// <summary>
     /// Interaction logic for App.xaml

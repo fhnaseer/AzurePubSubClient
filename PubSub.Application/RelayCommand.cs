@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PubSubClient.ViewModels
+namespace PubSub.Application
 {
     public class RelayCommand : ICommand
     {

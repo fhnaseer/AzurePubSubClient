@@ -1,4 +1,4 @@
-﻿namespace PubSubClient.Views
+﻿namespace PubSub.Application.Views
 {
     /// <summary>
     /// Interaction logic for SubscriberView.xaml
