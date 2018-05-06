@@ -17,7 +17,7 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <TextBlock Text="Base Url" />
-            <TextBox Text="{Binding BaseUrl}" />
+            <TextBox Text="{Binding BaseAddress}" />
         </DockPanel>
         <UniformGrid Columns="2">
             <ContentControl Content="{Binding SubscriberViewModel}" />

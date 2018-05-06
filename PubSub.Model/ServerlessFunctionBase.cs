@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 
 namespace PubSub.Model
 {
@@ -14,7 +15,7 @@ namespace PubSub.Model
 
         protected abstract string FunctionRelativeAddress { get; }
 
-        public string FunctionAddress => $"{_baseAddress}/api/{FunctionRelativeAddress}";
+        public string FunctionAddress => string.Format(CultureInfo.CurrentCulture, "{0}/api/{1}", _baseAddress, FunctionRelativeAddress);
 
         public abstract Task<string> ExecuteFunction(object parameters);
     }

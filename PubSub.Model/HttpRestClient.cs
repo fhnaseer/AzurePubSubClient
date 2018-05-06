@@ -7,18 +7,20 @@ namespace PubSub.Model
 {
     public static class HttpRestClient
     {
-        public static async Task<string> Post(string url, object postObject = null)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "object")]
+        public static async Task<string> Post(string address, object postObject = null)
         {
             var content = JsonConvert.SerializeObject(postObject);
             var client = new HttpClient { Timeout = TimeSpan.FromMinutes(1) };
-            var response = await client.PostAsync(url, new StringContent(content, System.Text.Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(address, new StringContent(content, System.Text.Encoding.UTF8, "application/json"));
             return await response.Content.ReadAsStringAsync();
         }
 
-        public static async Task<string> Get(string url)
+        public static async Task<string> Get(string address)
         {
             var client = new HttpClient { Timeout = TimeSpan.FromMinutes(1) };
-            var response = await client.GetAsync(url);
+            var response = await client.GetAsync(address);
             return await response.Content.ReadAsStringAsync();
         }
     }

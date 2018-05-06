@@ -4,16 +4,16 @@ namespace PubSub.Application.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        private string _baseUrl;
-        public string BaseUrl
+        private string _baseAddress = "http://localhost:7071";
+        public string BaseAddress
         {
-            get => _baseUrl;
+            get => _baseAddress;
             set
             {
-                _baseUrl = value;
-                SubscriberViewModel.AzureContext = new AzureContext(_baseUrl);
-                PublisherViewModel.AzureContext = new AzureContext(_baseUrl);
-                OnPropertyChanged(nameof(BaseUrl));
+                _baseAddress = value;
+                SubscriberViewModel.AzureContext = new AzureContext(_baseAddress);
+                PublisherViewModel.AzureContext = new AzureContext(_baseAddress);
+                OnPropertyChanged(nameof(BaseAddress));
             }
         }
 
