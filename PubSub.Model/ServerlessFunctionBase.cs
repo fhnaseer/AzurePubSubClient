@@ -1,9 +1,10 @@
 ﻿using System.Globalization;
 using System.Threading.Tasks;
+using PubSub.Model.Responses;
 
 namespace PubSub.Model
 {
-    public abstract class ServerlessFunctionBase : IServerlessFunction
+    public abstract class ServerlessFunctionBase
     {
         private readonly string _baseAddress;
         protected ServerlessFunctionBase(string baseAddress)
@@ -18,5 +19,7 @@ namespace PubSub.Model
         public string FunctionAddress => string.Format(CultureInfo.CurrentCulture, "{0}/api/{1}", _baseAddress, FunctionRelativeAddress);
 
         public abstract Task<string> ExecuteFunction(object parameters);
+
+        public abstract MessageBase SampleMessageInput { get; }
     }
 }

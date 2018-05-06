@@ -21,7 +21,11 @@
                 <TextBlock Text="Subscriber Id" />
                 <TextBox Text="{Binding SubscriberId}" />
             </DockPanel>
-            <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" />
+            <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock Text="Sample Input" />
+                <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" />
+            </DockPanel>
             <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Function" />
         </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

@@ -17,8 +17,8 @@ namespace PubSub.Application.ViewModels
             var response = await AzureContext.RegisterSubscriberFunction.ExecuteFunction(null);
             SubscriberId = JsonConvert.DeserializeObject<SubscribeMessage>(response).SubscriberId;
             AppendText(response);
+            Functions.Add(new SubscribeTopicFunction(AzureContext.BaseAddress));
         }
-
 
         private string _subscriberId;
         public string SubscriberId
@@ -31,11 +31,11 @@ namespace PubSub.Application.ViewModels
             }
         }
 
-        private ObservableCollection<IServerlessFunction> _functions;
-        public ObservableCollection<IServerlessFunction> Functions => _functions ?? (_functions = new ObservableCollection<IServerlessFunction>());
+        private ObservableCollection<ServerlessFunctionBase> _functions;
+        public ObservableCollection<ServerlessFunctionBase> Functions => _functions ?? (_functions = new ObservableCollection<ServerlessFunctionBase>());
 
-        private IServerlessFunction _selectedFunction;
-        public IServerlessFunction SelectedFunction
+        private ServerlessFunctionBase _selectedFunction;
+        public ServerlessFunctionBase SelectedFunction
         {
             get => _selectedFunction;
             set
@@ -50,8 +50,10 @@ namespace PubSub.Application.ViewModels
 
         internal bool CanExecuteFunction() { return SelectedFunction != null; }
 
-        private void ExecuteFunction()
+        private async void ExecuteFunction()
         {
+            var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput.ToString());
+            AppendText(response);
         }
 
         private readonly StringBuilder _subscriberText = new StringBuilder();

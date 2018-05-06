@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using PubSub.Model.Responses;
 
 namespace PubSub.Model
 {
@@ -17,5 +18,7 @@ namespace PubSub.Model
         {
             return await HttpRestClient.Get(FunctionAddress);
         }
+
+        public override MessageBase SampleMessageInput => new MessageBase();
     }
 }
