@@ -13,4 +13,19 @@
     <DataTemplate DataType="{x:Type viewModels:PublisherViewModel}">
         <views:PublisherView />
     </DataTemplate>
+    
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="10" />
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Margin" Value="10" />
+    </Style>
+    <Style TargetType="TextBlock">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="Label">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>

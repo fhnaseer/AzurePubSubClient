@@ -9,12 +9,17 @@
     <d:UserControl.DataContext>
         <viewModels:HomeViewModel />
     </d:UserControl.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ContentControl Content="{Binding SubscriberViewModel}" Grid.Column="0"/>
-        <ContentControl Content="{Binding PublisherViewModel}"  Grid.Column="1"/>
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../ResourceDictionary.xaml" />
+    </UserControl.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock Text="Base Url" />
+            <TextBox Text="{Binding BaseUrl}" />
+        </DockPanel>
+        <UniformGrid Columns="2">
+            <ContentControl Content="{Binding SubscriberViewModel}" />
+            <ContentControl Content="{Binding PublisherViewModel}" />
+        </UniformGrid>
+    </DockPanel>
 </UserControl>
