@@ -17,6 +17,10 @@
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top">
             <Button Command="{Binding RegisterSubscriberCommand}" Content="Register" />
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock Text="Subscriber Id" />
+                <TextBox Text="{Binding SubscriberId}" />
+            </DockPanel>
             <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" />
             <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Function" />
         </StackPanel>

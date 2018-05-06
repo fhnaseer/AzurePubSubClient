@@ -9,7 +9,7 @@ namespace PubSub.Application.ViewModels
         private AzureContext _azureContext;
         public AzureContext AzureContext
         {
-            get => _azureContext ?? (_azureContext = new AzureContext(string.Empty));
+            get => _azureContext ?? (_azureContext = new AzureContext("http://localhost:7071"));
             set => _azureContext = value;
         }
 

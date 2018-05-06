@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureContext.cs" />
+    <Compile Include="Responses\SubscribeMessage.cs" />
     <Compile Include="ServerlessFunctionBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpRestClient.cs" />
@@ -61,5 +62,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

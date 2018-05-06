@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using Newtonsoft.Json;
 using PubSub.Model;
+using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
 {
@@ -13,7 +15,20 @@ namespace PubSub.Application.ViewModels
         private async void RegisterSubscriber()
         {
             var response = await AzureContext.RegisterSubscriberFunction.ExecuteFunction(null);
+            SubscriberId = JsonConvert.DeserializeObject<SubscribeMessage>(response).SubscriberId;
             AppendText(response);
+        }
+
+
+        private string _subscriberId;
+        public string SubscriberId
+        {
+            get => _subscriberId;
+            set
+            {
+                _subscriberId = value;
+                OnPropertyChanged(nameof(SubscriberId));
+            }
         }
 
         private ObservableCollection<IServerlessFunction> _functions;
