@@ -2,7 +2,7 @@
 
 namespace PubSub.Model.Responses
 {
-    public class SubscribeMessage : MessageBase
+    public class RegisterSubscriberResponse : MessageBase
     {
         [JsonProperty("id")]
         public string SubscriberId { get; set; }

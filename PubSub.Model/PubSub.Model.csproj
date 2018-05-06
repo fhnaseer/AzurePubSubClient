@@ -49,9 +49,9 @@
   <ItemGroup>
     <Compile Include="AzureContext.cs" />
     <Compile Include="Responses\MessageBase.cs" />
-    <Compile Include="Responses\SubscribeMessage.cs" />
+    <Compile Include="Responses\RegisterSubscriberResponse.cs" />
     <Compile Include="Responses\SubscribeResponse.cs" />
-    <Compile Include="Responses\SubscribeTopicMessage.cs" />
+    <Compile Include="Responses\SubscribeTopicInput.cs" />
     <Compile Include="ServerlessFunctionBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpRestClient.cs" />

@@ -15,7 +15,7 @@ namespace PubSub.Application.ViewModels
         private async void RegisterSubscriber()
         {
             var response = await AzureContext.RegisterSubscriberFunction.ExecuteFunction(null);
-            SubscriberId = JsonConvert.DeserializeObject<SubscribeMessage>(response).SubscriberId;
+            SubscriberId = JsonConvert.DeserializeObject<RegisterSubscriberResponse>(response).SubscriberId;
             AppendText(response);
             Functions.Add(new SubscribeTopicFunction(AzureContext.BaseAddress));
         }
@@ -52,9 +52,12 @@ namespace PubSub.Application.ViewModels
 
         private async void ExecuteFunction()
         {
-            var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput.ToString());
+            var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
             AppendText(response);
+            _subscribeResponse = JsonConvert.DeserializeObject<SubscribeResponse>(response);
         }
+
+        private SubscribeResponse _subscribeResponse;
 
         private readonly StringBuilder _subscriberText = new StringBuilder();
         public string SubscriberText => _subscriberText.ToString();
