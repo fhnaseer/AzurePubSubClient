@@ -24,13 +24,19 @@ namespace PubSub.Model
         private SubscribeContent _subscribeContent;
         private SubscribeContent SubscribeContent => _subscribeContent ?? (_subscribeContent = new SubscribeContent(BaseAddress));
 
+
+        private SubscribeFunctions _subscribeFunctions;
+        public SubscribeFunctions SubscribeFunctions => _subscribeFunctions ?? (_subscribeFunctions = new SubscribeFunctions(BaseAddress));
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public IList<ServerlessFunctionBase> GetSubscriberFunctions()
         {
             return new List<ServerlessFunctionBase>
             {
                 SubscribeTopic,
-                SubscribeContent
+                SubscribeContent,
+                SubscribeFunctions
             };
         }
     }
