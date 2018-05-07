@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PubSub.Model.Functions;
+using PubSub.Model.Functions.Publisher;
 using PubSub.Model.Functions.Subscriber;
 
 namespace PubSub.Model
@@ -39,14 +40,17 @@ namespace PubSub.Model
             };
         }
 
+
+        private PublishTopics _publishTopics;
+        public PublishTopics PublishTopics => _publishTopics ?? (_publishTopics = new PublishTopics(BaseAddress));
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public IList<ServerlessFunctionBase> GetPublisherFunctions()
         {
             return new List<ServerlessFunctionBase>
             {
-                SubscribeTopic,
-                SubscribeContent,
-                SubscribeFunctions
+                PublishTopics,
             };
         }
     }
