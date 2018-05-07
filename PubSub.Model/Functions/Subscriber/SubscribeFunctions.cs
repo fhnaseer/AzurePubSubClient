@@ -19,12 +19,12 @@ namespace PubSub.Model.Functions.Subscriber
             return await HttpRestClient.Post(FunctionAddress, parameters);
         }
 
-        public override MessageBase SampleMessageInput => new SubscribeFunctionInput
+        public override MessageBase SampleMessageInput => new FunctionInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
             SubscriptionType = "Text",
             MatchingInputs = "index",
-            MatchingFunction = "let populations = {'new zealand': 4693000, 'germany': 8267000}; return populations[index];"
+            MatchingFunction = "let populations = {'New Zealand': 4693000, 'Germany': 8267000}; return populations[index];"
         };
     }
 }
