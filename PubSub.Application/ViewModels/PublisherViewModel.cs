@@ -1,7 +1,12 @@
 ﻿namespace PubSub.Application.ViewModels
 {
-    public class PublisherViewModel : ViewModelBase
+    public class PublisherViewModel : PubSubViewModelBase
     {
-        public string Text { get; set; } = "Publisher";
+        public PublisherViewModel()
+        {
+            var functions = AzureContext.GetPublisherFunctions();
+            foreach (var function in functions)
+                Functions.Add(function);
+        }
     }
 }

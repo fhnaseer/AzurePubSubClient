@@ -11,7 +11,20 @@
     <d:UserControl.DataContext>
         <viewModels:PublisherViewModel />
     </d:UserControl.DataContext>
-    <Grid>
-        <Button Content="{Binding Text}" />
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../ResourceDictionary.xaml" />
+    </UserControl.Resources>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top">
+            <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock Text="Sample Input" />
+                <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" />
+            </DockPanel>
+            <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Function" />
+        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding SubscriberText}" TextWrapping="Wrap" />
+        </ScrollViewer>
+    </DockPanel>
 </UserControl>
