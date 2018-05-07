@@ -20,7 +20,7 @@ namespace PubSub.Model.Functions.Publisher
         }
 
         private MessageBase _sampleMessageInput;
-        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new PublishTopicsInput
+        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new TopicsInput
         {
             Message = "Some message,",
             Topics = new List<string> { "computer", "science" }

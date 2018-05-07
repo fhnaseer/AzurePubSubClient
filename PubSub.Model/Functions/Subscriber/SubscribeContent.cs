@@ -20,7 +20,7 @@ namespace PubSub.Model.Functions.Subscriber
             return await HttpRestClient.Post(FunctionAddress, parameters);
         }
 
-        public override MessageBase SampleMessageInput => new SubscribeContentInput
+        public override MessageBase SampleMessageInput => new ContentsInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
             Topics = new List<KeyValueContent>

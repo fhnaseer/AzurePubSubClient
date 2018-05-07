@@ -48,16 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureContext.cs" />
+    <Compile Include="Functions\Publisher\PublishContent.cs" />
     <Compile Include="Functions\Publisher\PublishTopics.cs" />
     <Compile Include="Functions\Subscriber\SubscribeContent.cs" />
     <Compile Include="Functions\Subscriber\SubscribeFunctions.cs" />
     <Compile Include="Responses\MessageBase.cs" />
-    <Compile Include="Responses\PublishTopicsInput.cs" />
     <Compile Include="Responses\RegisterSubscriberResponse.cs" />
-    <Compile Include="Responses\SubscribeContentInput.cs" />
+    <Compile Include="Responses\ContentsInput.cs" />
     <Compile Include="Responses\SubscribeFunctionInput.cs" />
     <Compile Include="Responses\SubscribeResponse.cs" />
-    <Compile Include="Responses\SubscribeTopicInput.cs" />
+    <Compile Include="Responses\TopicsInput.cs" />
     <Compile Include="Functions\ServerlessFunctionBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpRestClient.cs" />

@@ -40,10 +40,11 @@ namespace PubSub.Model
             };
         }
 
-
         private PublishTopics _publishTopics;
         public PublishTopics PublishTopics => _publishTopics ?? (_publishTopics = new PublishTopics(BaseAddress));
 
+        private PublishContent _publishContent;
+        public PublishContent PublishContent => _publishContent ?? (_publishContent = new PublishContent(BaseAddress));
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public IList<ServerlessFunctionBase> GetPublisherFunctions()
@@ -51,6 +52,7 @@ namespace PubSub.Model
             return new List<ServerlessFunctionBase>
             {
                 PublishTopics,
+                PublishContent
             };
         }
     }

@@ -3,8 +3,11 @@ using Newtonsoft.Json;
 
 namespace PubSub.Model.Responses
 {
-    public class PublishTopicsInput : MessageBase
+    public class TopicsInput : MessageBase
     {
+        [JsonProperty("subscriberId")]
+        public string SubscriberId { get; set; }
+
         [JsonProperty("message")]
         public string Message { get; set; }
 

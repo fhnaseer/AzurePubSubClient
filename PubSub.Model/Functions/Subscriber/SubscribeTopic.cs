@@ -20,7 +20,7 @@ namespace PubSub.Model.Functions.Subscriber
         }
 
         private MessageBase _sampleMessageInput;
-        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new SubscribeTopicInput
+        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new TopicsInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
             Topics = new List<string> { "computer", "science" }
