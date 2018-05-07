@@ -29,6 +29,9 @@ namespace PubSub.Model
         private SubscribeFunctions _subscribeFunctions;
         public SubscribeFunctions SubscribeFunctions => _subscribeFunctions ?? (_subscribeFunctions = new SubscribeFunctions(BaseAddress));
 
+        private UnregisterSubscriber _unregisterSubscriber;
+        public UnregisterSubscriber UnregisterSubscriber => _unregisterSubscriber ?? (_unregisterSubscriber = new UnregisterSubscriber(BaseAddress));
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public IList<ServerlessFunctionBase> GetSubscriberFunctions()
         {
@@ -36,7 +39,8 @@ namespace PubSub.Model
             {
                 SubscribeTopic,
                 SubscribeContent,
-                SubscribeFunctions
+                SubscribeFunctions,
+                UnregisterSubscriber
             };
         }
 
