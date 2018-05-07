@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using PubSub.Model.Responses;
 
-namespace PubSub.Model
+namespace PubSub.Model.Functions
 {
     public abstract class ServerlessFunctionBase
     {

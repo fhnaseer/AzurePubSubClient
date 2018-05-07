@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using PubSub.Model.Responses;
 
-namespace PubSub.Model
+namespace PubSub.Model.Functions.Subscriber
 {
-    public class SubscribeTopicFunction : ServerlessFunctionBase
+    public class SubscribeTopic : ServerlessFunctionBase
     {
-        public SubscribeTopicFunction(string baseAddress) : base(baseAddress)
+        public SubscribeTopic(string baseAddress) : base(baseAddress)
         {
         }
 

@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using PubSub.Model.Responses;
 
-namespace PubSub.Model
+namespace PubSub.Model.Functions.Subscriber
 {
-    public class RegisterSubscriberFunction : ServerlessFunctionBase
+    public class RegisterSubscriber : ServerlessFunctionBase
     {
-        public RegisterSubscriberFunction(string baseAddress)
+        public RegisterSubscriber(string baseAddress)
         : base(baseAddress)
         {
         }

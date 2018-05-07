@@ -6,6 +6,8 @@ using System.Windows.Input;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using PubSub.Model;
+using PubSub.Model.Functions;
+using PubSub.Model.Functions.Subscriber;
 using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
@@ -20,7 +22,7 @@ namespace PubSub.Application.ViewModels
             var response = await AzureContext.RegisterSubscriberFunction.ExecuteFunction(null);
             SubscriberId = JsonConvert.DeserializeObject<RegisterSubscriberResponse>(response).SubscriberId;
             AppendText(response);
-            Functions.Add(new SubscribeTopicFunction(AzureContext.BaseAddress));
+            Functions.Add(new SubscribeTopic(AzureContext.BaseAddress));
         }
 
         private string _subscriberId;

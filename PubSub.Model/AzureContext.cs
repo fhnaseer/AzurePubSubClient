@@ -1,4 +1,6 @@
-﻿namespace PubSub.Model
+﻿using PubSub.Model.Functions.Subscriber;
+
+namespace PubSub.Model
 {
     public class AzureContext
     {
@@ -9,7 +11,7 @@
 
         public string BaseAddress { get; }
 
-        private RegisterSubscriberFunction _registerSubscriberFunction;
-        public RegisterSubscriberFunction RegisterSubscriberFunction => _registerSubscriberFunction ?? (_registerSubscriberFunction = new RegisterSubscriberFunction(BaseAddress));
+        private RegisterSubscriber _registerSubscriberFunction;
+        public RegisterSubscriber RegisterSubscriberFunction => _registerSubscriberFunction ?? (_registerSubscriberFunction = new RegisterSubscriber(BaseAddress));
     }
 }
