@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
-using PubSub.Model;
 using PubSub.Model.Functions;
-using PubSub.Model.Functions.Subscriber;
 using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
@@ -19,10 +17,13 @@ namespace PubSub.Application.ViewModels
 
         private async void RegisterSubscriber()
         {
-            var response = await AzureContext.RegisterSubscriberFunction.ExecuteFunction(null);
+            var response = await AzureContext.RegisterSubscriber.ExecuteFunction(null);
             SubscriberId = JsonConvert.DeserializeObject<RegisterSubscriberResponse>(response).SubscriberId;
             AppendText(response);
-            Functions.Add(new SubscribeTopic(AzureContext.BaseAddress));
+            Functions.Clear();
+            var functions = AzureContext.GetSubscriberFunctions();
+            foreach (var function in functions)
+                Functions.Add(function);
         }
 
         private string _subscriberId;

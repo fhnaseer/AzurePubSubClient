@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureContext.cs" />
+    <Compile Include="Functions\Subscriber\SubscribeContent.cs" />
     <Compile Include="Responses\MessageBase.cs" />
     <Compile Include="Responses\RegisterSubscriberResponse.cs" />
+    <Compile Include="Responses\SubscribeContentInput.cs" />
     <Compile Include="Responses\SubscribeResponse.cs" />
     <Compile Include="Responses\SubscribeTopicInput.cs" />
     <Compile Include="Functions\ServerlessFunctionBase.cs" />
