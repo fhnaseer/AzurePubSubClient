@@ -10,5 +10,7 @@ namespace PubSub.Application.ViewModels
             foreach (var function in functions)
                 Functions.Add(function);
         }
+
+        internal PublisherViewModel() : base(null) { }
     }
 }

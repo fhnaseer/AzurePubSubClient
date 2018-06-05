@@ -15,6 +15,8 @@ namespace PubSub.Application.ViewModels
         {
         }
 
+        internal SubscriberViewModel() : base(null) { }
+
         private ICommand _registerSubscriberCommand;
         public ICommand RegisterSubscriberCommand => _registerSubscriberCommand ?? (_registerSubscriberCommand = new RelayCommand(RegisterSubscriber));
 
@@ -54,7 +56,6 @@ namespace PubSub.Application.ViewModels
             SelectedFunction.SampleMessageInput.SubscriberId = SubscriberId;
             var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
             AppendText(response);
-            //SetupMessageQueue(JsonConvert.DeserializeObject<SubscribeResponse>(response));
         }
 
         private IQueueClient _messageQueue;

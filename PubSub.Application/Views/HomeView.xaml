@@ -19,9 +19,25 @@
             <TextBlock Text="Base Url" />
             <TextBlock Text="{Binding BaseAddress}" />
         </DockPanel>
-        <UniformGrid Columns="2">
-            <ContentControl Content="{Binding SubscriberViewModel}" />
-            <ContentControl Content="{Binding PublisherViewModel}" />
-        </UniformGrid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Row="0" Grid.Column="0"  DockPanel.Dock="Top">
+                <TextBlock Text="Subscriber" />
+                <ComboBox ItemsSource="{Binding Subscribers}" SelectedItem="{Binding SelectedSubscriber}" SelectedIndex="{Binding SubscriberIndex}" DisplayMemberPath="{Binding SubscriberIndex}"/>
+            </DockPanel>
+            <DockPanel Grid.Row="0" Grid.Column="1"  DockPanel.Dock="Top">
+                <TextBlock Text="Publisher" />
+                <ComboBox ItemsSource="{Binding Publishers}" SelectedItem="{Binding SelectedPublisher}"  SelectedIndex="{Binding PublisherIndex}"  DisplayMemberPath="{Binding PublisherIndex}"/>
+            </DockPanel>
+            <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding SelectedSubscriber}" />
+            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedPublisher}" />
+        </Grid>
     </DockPanel>
 </UserControl>
