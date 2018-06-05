@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
-using PubSub.Model.Responses;
+﻿using PubSub.Model.Responses;
 
 namespace PubSub.Model.Functions.Subscriber
 {
-    public class SubscribeFunctions : ServerlessFunctionBase
+    public class SubscribeFunctions : PostServerlessFunctionBase
     {
         public SubscribeFunctions(string baseAddress)
             : base(baseAddress)
@@ -13,11 +12,6 @@ namespace PubSub.Model.Functions.Subscriber
         public override string Name => "Subscribe Function,";
 
         protected override string FunctionRelativeAddress => "SubscribeFunction";
-
-        public override async Task<string> ExecuteFunction(object parameters)
-        {
-            return await HttpRestClient.Post(FunctionAddress, parameters);
-        }
 
         public override MessageBase SampleMessageInput => new FunctionInput
         {

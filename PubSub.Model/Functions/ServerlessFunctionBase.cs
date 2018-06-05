@@ -22,4 +22,28 @@ namespace PubSub.Model.Functions
 
         public abstract MessageBase SampleMessageInput { get; }
     }
+
+    public abstract class GetServerlessFunctionBase : ServerlessFunctionBase
+    {
+        protected GetServerlessFunctionBase(string baseAddress) : base(baseAddress)
+        {
+        }
+
+        public override async Task<string> ExecuteFunction(object parameters)
+        {
+            return await HttpRestClient.Get(FunctionAddress);
+        }
+    }
+
+    public abstract class PostServerlessFunctionBase : ServerlessFunctionBase
+    {
+        protected PostServerlessFunctionBase(string baseAddress) : base(baseAddress)
+        {
+        }
+
+        public override async Task<string> ExecuteFunction(object parameters)
+        {
+            return await HttpRestClient.Get(FunctionAddress);
+        }
+    }
 }
