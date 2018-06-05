@@ -3,6 +3,10 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:viewModels="clr-namespace:PubSub.Application.ViewModels"
             xmlns:views="clr-namespace:PubSub.Application.Views">
+    <DataTemplate DataType="{x:Type viewModels:CloudProviderViewModel}">
+        <views:CloudProviderView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
         <views:HomeView />
     </DataTemplate>

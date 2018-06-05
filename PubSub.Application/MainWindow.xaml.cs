@@ -10,7 +10,7 @@ namespace PubSub.Application
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new HomeViewModel();
+            DataContext = new CloudProviderViewModel();
         }
     }
 }

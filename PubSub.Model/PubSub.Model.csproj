@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureContext.cs" />
+    <Compile Include="CloudProviderMetadata.cs" />
     <Compile Include="Functions\Publisher\PublishContent.cs" />
     <Compile Include="Functions\Publisher\PublishFunction.cs" />
     <Compile Include="Functions\Publisher\PublishTopics.cs" />
