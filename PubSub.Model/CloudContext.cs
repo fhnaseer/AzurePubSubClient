@@ -5,9 +5,9 @@ using PubSub.Model.Functions.Subscriber;
 
 namespace PubSub.Model
 {
-    public class AzureContext
+    public class CloudContext
     {
-        public AzureContext(string baseAddress)
+        public CloudContext(string baseAddress)
         {
             BaseAddress = baseAddress;
         }

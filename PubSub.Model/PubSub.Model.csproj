@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureContext.cs" />
+    <Compile Include="CloudContext.cs" />
     <Compile Include="CloudProviderMetadata.cs" />
     <Compile Include="Functions\Publisher\PublishContent.cs" />
     <Compile Include="Functions\Publisher\PublishFunction.cs" />
