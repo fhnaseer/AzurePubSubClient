@@ -6,14 +6,13 @@ namespace PubSub.Application.ViewModels
 {
     public class CloudProviderViewModel : ViewModelBase
     {
-
         private ObservableCollection<CloudProvider> _providers;
         public ObservableCollection<CloudProvider> Providers => _providers ?? (_providers = new ObservableCollection<CloudProvider>(new[] { Model.CloudProvider.Azure, Model.CloudProvider.Aws }));
 
         private CloudProviderMetadata _cloudProvider;
         public CloudProviderMetadata CloudProvider
         {
-            get => _cloudProvider;
+            get => _cloudProvider ?? (_cloudProvider = new CloudProviderMetadata());
             set
             {
                 _cloudProvider = value;
@@ -21,9 +20,10 @@ namespace PubSub.Application.ViewModels
             }
         }
 
-
         private ICommand _launchServerlessCommand;
-        public ICommand LaunchServerlessCommand => _launchServerlessCommand ?? (_launchServerlessCommand = new RelayCommand(LaunchServerless));
+        public ICommand LaunchServerlessCommand => _launchServerlessCommand ?? (_launchServerlessCommand = new RelayCommand(LaunchServerless, CanLaunchServerless));
+
+        internal bool CanLaunchServerless() { return CloudProvider.BaseAddress != null && CloudProvider.PublishersCount != 0 && CloudProvider.SubscribersCount != 0; }
 
         internal void LaunchServerless()
         {

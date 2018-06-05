@@ -15,17 +15,25 @@
     </UserControl.Resources>
     <DockPanel >
         <Button Content="Launch" Command="{Binding LaunchServerlessCommand}" DockPanel.Dock="Bottom"/>
-        <StackPanel>
-            <UniformGrid Rows="2" Columns="2">
-                <Label Content="Provider"/>
-                <ComboBox SelectedItem="{Binding CloudProvider.CloudProvider}" ItemsSource="{Binding Providers}" />
-                <Label Content="Publishers Count" />
-                <TextBox Text="{Binding CloudProvider.PublishersCount}" />
-                <Label Content="Subscribers Count" />
-                <TextBox Text="{Binding CloudProvider.SubscribersCount}" />
-                <Label Content="Base Url" />
-                <TextBox Text="{Binding CloudProvider.BaseAddress}" />
-            </UniformGrid>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Provider" />
+            <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding CloudProvider.CloudProvider}" ItemsSource="{Binding Providers}" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Publishers Count" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CloudProvider.PublishersCount}" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Subscribers Count"  />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CloudProvider.SubscribersCount}"  />
+            <Label Grid.Row="3" Grid.Column="0" Content="Base Url"  />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CloudProvider.BaseAddress}"  />
+        </Grid>
     </DockPanel>
 </UserControl>
