@@ -7,8 +7,7 @@ namespace PubSub.Model.Responses
         [JsonProperty("subscriberId")]
         public string SubscriberId { get; set; }
 
-        [JsonProperty("message")]
-        public string Message { get; set; }
+        [JsonProperty("message")] public string Message { get; set; } = "Some Message;";
 
         public override string ToString()
         {

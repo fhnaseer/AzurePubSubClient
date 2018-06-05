@@ -6,11 +6,11 @@ namespace PubSub.Application.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        private CloudContext _azureContext;
-        public CloudContext AzureContext
+        private CloudContext _cloudContext;
+        public CloudContext CloudContext
         {
-            get => _azureContext ?? (_azureContext = new CloudContext("http://localhost:7071"));
-            set => _azureContext = value;
+            get => _cloudContext ?? (_cloudContext = new CloudContext("http://localhost:7071"));
+            set => _cloudContext = value;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

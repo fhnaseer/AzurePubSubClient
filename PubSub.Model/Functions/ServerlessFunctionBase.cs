@@ -43,7 +43,7 @@ namespace PubSub.Model.Functions
 
         public override async Task<string> ExecuteFunction(object parameters)
         {
-            return await HttpRestClient.Get(FunctionAddress);
+            return await HttpRestClient.Post(FunctionAddress, parameters);
         }
     }
 }

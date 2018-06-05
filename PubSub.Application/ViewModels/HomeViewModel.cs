@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using PubSub.Model;
 
 namespace PubSub.Application.ViewModels
@@ -55,10 +56,24 @@ namespace PubSub.Application.ViewModels
         private readonly string _baseAddress = "http://localhost:7071";
         public string BaseAddress => _cloudProvider == null ? _baseAddress : _cloudProvider.BaseAddress;
 
-        //private SubscriberViewModel _subscriberViewModel;
-        //public SubscriberViewModel SubscriberViewModel => _subscriberViewModel ?? (_subscriberViewModel = new SubscriberViewModel(_cloudProvider));
 
-        //private PublisherViewModel _publisherViewModel;
-        //public PublisherViewModel PublisherViewModel => _publisherViewModel ?? (_publisherViewModel = new PublisherViewModel(_cloudProvider));
+        private ICommand _registerSubscribersCommand;
+        public ICommand RegisterSubscribersCommand => _registerSubscribersCommand ?? (_registerSubscribersCommand = new RelayCommand(RegisterSubscribers));
+
+        internal void RegisterSubscribers()
+        {
+            foreach (var subscriber in Subscribers)
+                subscriber.RegisterSubscriber();
+        }
+
+
+        private ICommand _unregisterSubscribersCommand;
+        public ICommand UnregisterSubscribersCommand => _unregisterSubscribersCommand ?? (_unregisterSubscribersCommand = new RelayCommand(UnregisterSubscribers));
+
+        internal void UnregisterSubscribers()
+        {
+            foreach (var subscriber in Subscribers)
+                subscriber.UnregisterSubscriber();
+        }
     }
 }

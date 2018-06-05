@@ -16,6 +16,8 @@
     </UserControl.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
+            <Button Content="Register Subscribers" Command="{Binding RegisterSubscribersCommand}"/>
+            <Button Content="Unregister Subscribers" Command="{Binding UnregisterSubscribersCommand}" />
             <TextBlock Text="Base Url" />
             <TextBlock Text="{Binding BaseAddress}" />
         </DockPanel>

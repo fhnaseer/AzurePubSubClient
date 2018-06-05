@@ -37,7 +37,6 @@ namespace PubSub.Model
                 SubscribeTopic,
                 SubscribeContent,
                 SubscribeFunctions,
-                UnregisterSubscriber
             };
         }
 

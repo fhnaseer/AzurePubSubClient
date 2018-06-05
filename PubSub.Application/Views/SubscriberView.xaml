@@ -16,7 +16,6 @@
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top">
-            <Button Command="{Binding RegisterSubscriberCommand}" Content="Register" />
             <DockPanel DockPanel.Dock="Top">
                 <TextBlock Text="Subscriber Id" />
                 <TextBox Text="{Binding SubscriberId}" />
