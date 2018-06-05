@@ -1,8 +1,10 @@
-﻿namespace PubSub.Application.ViewModels
+﻿using PubSub.Model;
+
+namespace PubSub.Application.ViewModels
 {
     public class PublisherViewModel : PubSubViewModelBase
     {
-        public PublisherViewModel()
+        public PublisherViewModel(CloudProviderMetadata cloudProvider) : base(cloudProvider)
         {
             var functions = AzureContext.GetPublisherFunctions();
             foreach (var function in functions)

@@ -56,7 +56,6 @@
     <Compile Include="Functions\Subscriber\SubscribeFunctions.cs" />
     <Compile Include="Functions\Subscriber\UnregisterSubscriber.cs" />
     <Compile Include="Responses\MessageBase.cs" />
-    <Compile Include="Responses\RegisterSubscriberResponse.cs" />
     <Compile Include="Responses\ContentsInput.cs" />
     <Compile Include="Responses\FunctionInput.cs" />
     <Compile Include="Responses\SubscribeResponse.cs" />

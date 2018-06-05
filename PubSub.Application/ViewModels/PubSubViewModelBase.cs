@@ -1,12 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using PubSub.Model;
 using PubSub.Model.Functions;
 
 namespace PubSub.Application.ViewModels
 {
     public abstract class PubSubViewModelBase : ViewModelBase
     {
+        protected CloudProviderMetadata CloudProvider { get; }
+
+        protected PubSubViewModelBase(CloudProviderMetadata cloudProvider)
+        {
+            CloudProvider = cloudProvider;
+        }
+
         private ObservableCollection<ServerlessFunctionBase> _functions;
         public ObservableCollection<ServerlessFunctionBase> Functions => _functions ?? (_functions = new ObservableCollection<ServerlessFunctionBase>());
 
@@ -33,6 +41,7 @@ namespace PubSub.Application.ViewModels
         }
 
         private readonly StringBuilder _subscriberText = new StringBuilder();
+
         public string SubscriberText => _subscriberText.ToString();
 
         public void AppendText(string nextLine)

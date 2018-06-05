@@ -12,7 +12,7 @@ namespace PubSub.Application.ViewModels
         private CloudProviderMetadata _cloudProvider;
         public CloudProviderMetadata CloudProvider
         {
-            get => _cloudProvider ?? (_cloudProvider = new CloudProviderMetadata());
+            get => _cloudProvider ?? (_cloudProvider = new CloudProviderMetadata { BaseAddress = "http://localhost:7071", PublishersCount = 1, SubscribersCount = 1 });
             set
             {
                 _cloudProvider = value;
@@ -27,6 +27,9 @@ namespace PubSub.Application.ViewModels
 
         internal void LaunchServerless()
         {
+            var window = new MainWindow();
+            window.DataContext = new HomeViewModel(CloudProvider);
+            window.Show();
         }
     }
 }

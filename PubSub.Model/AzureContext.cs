@@ -17,14 +17,11 @@ namespace PubSub.Model
         private RegisterSubscriber _registerSubscriber;
         public RegisterSubscriber RegisterSubscriber => _registerSubscriber ?? (_registerSubscriber = new RegisterSubscriber(BaseAddress));
 
-
         private SubscribeTopic _subscribeTopic;
         private SubscribeTopic SubscribeTopic => _subscribeTopic ?? (_subscribeTopic = new SubscribeTopic(BaseAddress));
 
-
         private SubscribeContent _subscribeContent;
         private SubscribeContent SubscribeContent => _subscribeContent ?? (_subscribeContent = new SubscribeContent(BaseAddress));
-
 
         private SubscribeFunctions _subscribeFunctions;
         public SubscribeFunctions SubscribeFunctions => _subscribeFunctions ?? (_subscribeFunctions = new SubscribeFunctions(BaseAddress));

@@ -4,23 +4,22 @@ namespace PubSub.Application.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        private string _baseAddress = "http://localhost:7071";
-        public string BaseAddress
+        private readonly CloudProviderMetadata _cloudProvider;
+
+        public HomeViewModel(CloudProviderMetadata cloudProvider)
         {
-            get => _baseAddress;
-            set
-            {
-                _baseAddress = value;
-                SubscriberViewModel.AzureContext = new AzureContext(_baseAddress);
-                PublisherViewModel.AzureContext = new AzureContext(_baseAddress);
-                OnPropertyChanged(nameof(BaseAddress));
-            }
+            _cloudProvider = cloudProvider;
         }
 
+        internal HomeViewModel() { }
+
+        private readonly string _baseAddress = "http://localhost:7071";
+        public string BaseAddress => _cloudProvider == null ? _baseAddress : _cloudProvider.BaseAddress;
+
         private SubscriberViewModel _subscriberViewModel;
-        public SubscriberViewModel SubscriberViewModel => _subscriberViewModel ?? (_subscriberViewModel = new SubscriberViewModel());
+        public SubscriberViewModel SubscriberViewModel => _subscriberViewModel ?? (_subscriberViewModel = new SubscriberViewModel(_cloudProvider));
 
         private PublisherViewModel _publisherViewModel;
-        public PublisherViewModel PublisherViewModel => _publisherViewModel ?? (_publisherViewModel = new PublisherViewModel());
+        public PublisherViewModel PublisherViewModel => _publisherViewModel ?? (_publisherViewModel = new PublisherViewModel(_cloudProvider));
     }
 }

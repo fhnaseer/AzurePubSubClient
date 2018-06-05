@@ -4,25 +4,39 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
+using PubSub.Model;
 using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
 {
     public class SubscriberViewModel : PubSubViewModelBase
     {
+        public SubscriberViewModel(CloudProviderMetadata cloudProvider) : base(cloudProvider)
+        {
+        }
+
         private ICommand _registerSubscriberCommand;
         public ICommand RegisterSubscriberCommand => _registerSubscriberCommand ?? (_registerSubscriberCommand = new RelayCommand(RegisterSubscriber));
 
         private async void RegisterSubscriber()
         {
-            var response = await AzureContext.RegisterSubscriber.ExecuteFunction(null);
-            SubscriberId = JsonConvert.DeserializeObject<RegisterSubscriberResponse>(response).SubscriberId;
-            AppendText(response);
+            var responseString = await AzureContext.RegisterSubscriber.ExecuteFunction(null);
+            if (CloudProvider.CloudProvider == Model.CloudProvider.Azure)
+            {
+                var subscribeResponse = JsonConvert.DeserializeObject<SubscribeResponse>(responseString);
+                SubscriberId = subscribeResponse.QueueName;
+                ConnectionString = subscribeResponse.ConnectionString;
+                SetupMessageQueue(subscribeResponse);
+            }
+
+            AppendText(responseString);
             Functions.Clear();
             var functions = AzureContext.GetSubscriberFunctions();
             foreach (var function in functions)
                 Functions.Add(function);
         }
+
+        public string ConnectionString { get; set; }
 
         private string _subscriberId;
         public string SubscriberId
@@ -37,9 +51,10 @@ namespace PubSub.Application.ViewModels
 
         public override async void ExecuteFunction()
         {
+            SelectedFunction.SampleMessageInput.SubscriberId = SubscriberId;
             var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
             AppendText(response);
-            SetupMessageQueue(JsonConvert.DeserializeObject<SubscribeResponse>(response));
+            //SetupMessageQueue(JsonConvert.DeserializeObject<SubscribeResponse>(response));
         }
 
         private IQueueClient _messageQueue;
