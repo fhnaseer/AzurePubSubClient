@@ -14,6 +14,12 @@
 
         public int SubscribersCount { get; set; }
 
-        public string BaseAddress { get; set; }
+        private string _baseAddress;
+
+        public string BaseAddress
+        {
+            get => _baseAddress?.Trim();
+            set => _baseAddress = value;
+        }
     }
 }

@@ -9,5 +9,8 @@ namespace PubSub.Model.Responses
 
         [JsonProperty("queueName")]
         public string QueueName { get; set; }
+
+        [JsonProperty("QueueUrl")]
+        public string QueueUrl { get; set; }
     }
 }

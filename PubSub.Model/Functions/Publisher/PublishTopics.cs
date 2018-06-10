@@ -11,7 +11,7 @@ namespace PubSub.Model.Functions.Publisher
 
         public override string Name => "Publish Topics,";
 
-        protected override string FunctionRelativeAddress => "PublishTopic";
+        protected override string FunctionRelativeAddress => "publishtopic";
 
         private MessageBase _sampleMessageInput;
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new TopicsInput

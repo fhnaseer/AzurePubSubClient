@@ -11,7 +11,7 @@ namespace PubSub.Model.Functions.Subscriber
 
         public override string Name => "Subscribe Function,";
 
-        protected override string FunctionRelativeAddress => "SubscribeFunction";
+        protected override string FunctionRelativeAddress => "subscribefunction";
 
         public override MessageBase SampleMessageInput => new FunctionInput
         {

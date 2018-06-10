@@ -11,7 +11,7 @@ namespace PubSub.Model.Functions.Subscriber
 
         public override string Name => "Unregister Subscriber,";
 
-        protected override string FunctionRelativeAddress => "UnregisterSubscriber";
+        protected override string FunctionRelativeAddress => "unregistersubscriber";
 
         public override MessageBase SampleMessageInput => new UnregisterSubscriberInput
         {

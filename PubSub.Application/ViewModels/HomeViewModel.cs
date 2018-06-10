@@ -61,7 +61,6 @@ namespace PubSub.Application.ViewModels
         private readonly string _baseAddress = "http://localhost:7071";
         public string BaseAddress => _cloudProvider == null ? _baseAddress : _cloudProvider.BaseAddress;
 
-
         private ICommand _registerSubscribersCommand;
         public ICommand RegisterSubscribersCommand => _registerSubscribersCommand ?? (_registerSubscribersCommand = new RelayCommand(RegisterSubscribers));
 
@@ -70,7 +69,6 @@ namespace PubSub.Application.ViewModels
             foreach (var subscriber in Subscribers)
                 subscriber.RegisterSubscriber();
         }
-
 
         private ICommand _unregisterSubscribersCommand;
         public ICommand UnregisterSubscribersCommand => _unregisterSubscribersCommand ?? (_unregisterSubscribersCommand = new RelayCommand(UnregisterSubscribers));

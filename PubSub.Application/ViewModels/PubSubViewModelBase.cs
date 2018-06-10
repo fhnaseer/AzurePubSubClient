@@ -13,6 +13,7 @@ namespace PubSub.Application.ViewModels
         protected PubSubViewModelBase(CloudProviderMetadata cloudProvider)
         {
             CloudProvider = cloudProvider;
+            CloudContext = new CloudContext(CloudProvider.BaseAddress);
         }
 
         private ObservableCollection<ServerlessFunctionBase> _functions;

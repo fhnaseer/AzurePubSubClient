@@ -12,7 +12,7 @@ namespace PubSub.Model.Functions.Subscriber
 
         public override string Name => "Subscribe Content,";
 
-        protected override string FunctionRelativeAddress => "SubscribeContent";
+        protected override string FunctionRelativeAddress => "subscribecontent";
 
         public override MessageBase SampleMessageInput => new ContentsInput
         {
