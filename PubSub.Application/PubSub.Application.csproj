@@ -98,12 +98,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ViewModels\AwsSubscriberViewModel.cs" />
     <Compile Include="ViewModels\CloudProviderViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PublisherViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\PubSubViewModelBase.cs" />
-    <Compile Include="ViewModels\SubscriberViewModel.cs" />
+    <Compile Include="ViewModels\AzureSubscriberViewModel.cs" />
+    <Compile Include="ViewModels\SubscriberViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\CloudProviderView.xaml.cs">
       <DependentUpon>CloudProviderView.xaml</DependentUpon>

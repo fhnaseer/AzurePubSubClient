@@ -8,9 +8,9 @@ using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
 {
-    public class SubscriberViewModel : PubSubViewModelBase
+    public class AzureSubscriberViewModel : SubscriberViewModelBase
     {
-        public SubscriberViewModel(CloudProviderMetadata cloudProvider) : base(cloudProvider)
+        public AzureSubscriberViewModel(CloudProviderMetadata cloudProvider) : base(cloudProvider)
         {
             Functions.Clear();
             var functions = CloudContext.GetSubscriberFunctions();
@@ -18,48 +18,17 @@ namespace PubSub.Application.ViewModels
                 Functions.Add(function);
         }
 
-        internal SubscriberViewModel() : base(null) { }
+        internal AzureSubscriberViewModel() : base(null) { }
 
-        internal async void RegisterSubscriber()
+        protected override void OnRegisterSubscriber(string response)
         {
-            var responseString = await CloudContext.RegisterSubscriber.ExecuteFunction(null);
-            if (CloudProvider.CloudProvider == Model.CloudProvider.Azure)
-            {
-                var subscribeResponse = JsonConvert.DeserializeObject<SubscribeResponse>(responseString);
-                SubscriberId = subscribeResponse.QueueName;
-                ConnectionString = subscribeResponse.ConnectionString;
-                SetupMessageQueue(subscribeResponse);
-            }
-            AppendText(responseString);
-        }
-
-        internal async void UnregisterSubscriber()
-        {
-            var message = CloudContext.UnregisterSubscriber.SampleMessageInput;
-            message.SubscriberId = SubscriberId;
-            var response = await CloudContext.UnregisterSubscriber.ExecuteFunction(message);
-            AppendText(response);
+            var subscribeResponse = JsonConvert.DeserializeObject<SubscribeResponse>(response);
+            SubscriberId = subscribeResponse.QueueName;
+            ConnectionString = subscribeResponse.ConnectionString;
+            SetupMessageQueue(subscribeResponse);
         }
 
         public string ConnectionString { get; set; }
-
-        private string _subscriberId;
-        public string SubscriberId
-        {
-            get => _subscriberId;
-            set
-            {
-                _subscriberId = value;
-                OnPropertyChanged(nameof(SubscriberId));
-            }
-        }
-
-        public override async void ExecuteFunction()
-        {
-            SelectedFunction.SampleMessageInput.SubscriberId = SubscriberId;
-            var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
-            AppendText(response);
-        }
 
         private IQueueClient _messageQueue;
 

@@ -14,16 +14,21 @@ namespace PubSub.Application.ViewModels
             for (var i = 0; i < _cloudProvider.PublishersCount; i++)
                 Publishers.Add(new PublisherViewModel(_cloudProvider));
             for (var i = 0; i < _cloudProvider.SubscribersCount; i++)
-                Subscribers.Add(new SubscriberViewModel(_cloudProvider));
+            {
+                if (_cloudProvider.CloudProvider == CloudProvider.Azure)
+                    Subscribers.Add(new AzureSubscriberViewModel(_cloudProvider));
+                else
+                    Subscribers.Add(new AwsSubscriberViewModel(_cloudProvider));
+            }
         }
 
         internal HomeViewModel() { }
 
-        private ObservableCollection<SubscriberViewModel> _subscribers;
-        public ObservableCollection<SubscriberViewModel> Subscribers => _subscribers ?? (_subscribers = new ObservableCollection<SubscriberViewModel>());
+        private ObservableCollection<SubscriberViewModelBase> _subscribers;
+        public ObservableCollection<SubscriberViewModelBase> Subscribers => _subscribers ?? (_subscribers = new ObservableCollection<SubscriberViewModelBase>());
 
-        private SubscriberViewModel _selectedSubscriber;
-        public SubscriberViewModel SelectedSubscriber
+        private SubscriberViewModelBase _selectedSubscriber;
+        public SubscriberViewModelBase SelectedSubscriber
         {
             get => _selectedSubscriber;
             set
