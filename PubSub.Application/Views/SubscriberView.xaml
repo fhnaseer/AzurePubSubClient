@@ -18,7 +18,7 @@
         <StackPanel DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Top">
                 <TextBlock Text="Subscriber Id" />
-                <TextBox Text="{Binding SubscriberId}" />
+                <TextBox Text="{Binding Subscriber.SubscriberId}" />
             </DockPanel>
             <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
             <DockPanel DockPanel.Dock="Top">
@@ -28,7 +28,7 @@
             <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Function" />
         </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding SubscriberText}" TextWrapping="Wrap" />
+            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding MessageResponses}" TextWrapping="Wrap" />
         </ScrollViewer>
     </DockPanel>
 </UserControl>

@@ -41,14 +41,14 @@ namespace PubSub.Application.ViewModels
             AppendText(response);
         }
 
-        private readonly StringBuilder _subscriberText = new StringBuilder();
+        private readonly StringBuilder _messageResponses = new StringBuilder();
 
-        public string SubscriberText => _subscriberText.ToString();
+        public string MessageResponses => _messageResponses.ToString();
 
         public void AppendText(string nextLine)
         {
-            _subscriberText.AppendLine(nextLine);
-            OnPropertyChanged(nameof(SubscriberText));
+            _messageResponses.AppendLine(nextLine);
+            OnPropertyChanged(nameof(MessageResponses));
         }
     }
 }

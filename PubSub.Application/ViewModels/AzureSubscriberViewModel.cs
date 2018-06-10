@@ -2,9 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
-using Newtonsoft.Json;
 using PubSub.Model;
-using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
 {
@@ -20,22 +18,12 @@ namespace PubSub.Application.ViewModels
 
         internal AzureSubscriberViewModel() : base(null) { }
 
-        protected override void OnRegisterSubscriber(string response)
-        {
-            var subscribeResponse = JsonConvert.DeserializeObject<SubscribeResponse>(response);
-            SubscriberId = subscribeResponse.QueueName;
-            ConnectionString = subscribeResponse.ConnectionString;
-            SetupMessageQueue(subscribeResponse);
-        }
-
-        public string ConnectionString { get; set; }
-
         private IQueueClient _messageQueue;
 
-        private void SetupMessageQueue(SubscribeResponse subscribeResponse)
+        protected override void SetupMessageQueue()
         {
             if (_messageQueue != null) return;
-            _messageQueue = new QueueClient(subscribeResponse.ConnectionString, subscribeResponse.QueueName);
+            _messageQueue = new QueueClient(Subscriber.ConnectionString, Subscriber.QueueName);
             var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
             {
                 MaxConcurrentCalls = 1,

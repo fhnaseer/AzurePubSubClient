@@ -1,4 +1,6 @@
-﻿using PubSub.Model;
+﻿using Newtonsoft.Json;
+using PubSub.Model;
+using PubSub.Model.Responses;
 
 namespace PubSub.Application.ViewModels
 {
@@ -18,33 +20,34 @@ namespace PubSub.Application.ViewModels
         {
             var responseString = await CloudContext.RegisterSubscriber.ExecuteFunction(null);
             AppendText(responseString);
-            OnRegisterSubscriber(responseString);
+            Subscriber = JsonConvert.DeserializeObject<SubscribeResponse>(responseString);
+            SetupMessageQueue();
         }
 
-        protected abstract void OnRegisterSubscriber(string response);
+        protected abstract void SetupMessageQueue();
 
         internal async void UnregisterSubscriber()
         {
             var message = CloudContext.UnregisterSubscriber.SampleMessageInput;
-            message.SubscriberId = SubscriberId;
+            message.SubscriberId = Subscriber.SubscriberId;
             var response = await CloudContext.UnregisterSubscriber.ExecuteFunction(message);
             AppendText(response);
         }
 
-        private string _subscriberId;
-        public string SubscriberId
+        private SubscribeResponse _subscriber;
+        public SubscribeResponse Subscriber
         {
-            get => _subscriberId;
+            get => _subscriber;
             set
             {
-                _subscriberId = value;
-                OnPropertyChanged(nameof(SubscriberId));
+                _subscriber = value;
+                OnPropertyChanged(nameof(Subscriber));
             }
         }
 
         public override async void ExecuteFunction()
         {
-            SelectedFunction.SampleMessageInput.SubscriberId = SubscriberId;
+            SelectedFunction.SampleMessageInput.SubscriberId = Subscriber.SubscriberId;
             var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
             AppendText(response);
         }

@@ -1,4 +1,8 @@
-﻿using PubSub.Model;
+﻿using Amazon;
+using Amazon.Runtime;
+using Amazon.SQS;
+using Amazon.SQS.Model;
+using PubSub.Model;
 
 namespace PubSub.Application.ViewModels
 {
@@ -14,12 +18,33 @@ namespace PubSub.Application.ViewModels
 
         internal AwsSubscriberViewModel() : base(null) { }
 
-        protected override void OnRegisterSubscriber(string response)
+        private AmazonSQSClient _amazonClient;
+
+        protected override void SetupMessageQueue()
         {
-            //var subscribeResponse = JsonConvert.DeserializeObject<SubscribeResponse>(response);
-            //SubscriberId = subscribeResponse.QueueName;
-            //ConnectionString = subscribeResponse.ConnectionString;
-            //SetupMessageQueue(subscribeResponse);
+            if (_amazonClient != null) return;
+            var credentials = new AnonymousAWSCredentials();
+            _amazonClient = new AmazonSQSClient(credentials, RegionEndpoint.EUCentral1);
+            FetchMessages();
+        }
+
+        private async void FetchMessages()
+        {
+            var request = new ReceiveMessageRequest
+            {
+                AttributeNames = { "SentTimestamp" },
+                MaxNumberOfMessages = 1,
+                MessageAttributeNames = { "All" },
+                QueueUrl = Subscriber.QueueUrl,
+                WaitTimeSeconds = 20,
+            };
+
+            while (true)
+            {
+                var response = await _amazonClient.ReceiveMessageAsync(request);
+                foreach (var message in response.Messages)
+                    AppendText(message.Body);
+            }
         }
     }
 }
