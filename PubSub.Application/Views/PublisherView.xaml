@@ -15,16 +15,33 @@
         <ResourceDictionary Source="../ResourceDictionary.xaml" />
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Top">
-            <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
-            <DockPanel DockPanel.Dock="Top">
-                <TextBlock Text="Sample Input" />
-                <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" />
-            </DockPanel>
-            <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Function" />
-        </StackPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Base Url" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding BaseAddress}" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Publications Count" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding PublicationsCount}" />
+        </Grid>
+        <GroupBox Header="Functions" DockPanel.Dock="Top" Margin="10">
+            <StackPanel DockPanel.Dock="Top">
+                <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Sample Input" />
+                    <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height="75" />
+                </DockPanel>
+                <Button Command="{Binding ExecuteFunctionCommand}" Content="Send Publication" />
+            </StackPanel>
+        </GroupBox>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding MessageResponses}" TextWrapping="Wrap" />
+            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Publisher.MessageResponses}" TextWrapping="Wrap" />
         </ScrollViewer>
     </DockPanel>
 </UserControl>

@@ -17,7 +17,7 @@ namespace PubSub.Model.Functions.Subscriber
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new TopicsInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
-            Topics = new List<string> { "computer", "science" }
+            Topics = new List<string> { "computer" }
         });
     }
 }

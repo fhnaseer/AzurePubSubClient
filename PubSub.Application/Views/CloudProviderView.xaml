@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PubSub.Application.Views"
              xmlns:viewModels="clr-namespace:PubSub.Application.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -15,6 +14,7 @@
     </UserControl.Resources>
     <DockPanel >
         <Button Content="Launch" Command="{Binding LaunchServerlessCommand}" DockPanel.Dock="Bottom"/>
+        <Button Content="Clear" Command="{Binding ClearResourcesCommand}" DockPanel.Dock="Bottom"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -27,13 +27,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Provider" />
-            <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding CloudProvider.CloudProvider}" ItemsSource="{Binding Providers}" />
-            <Label Grid.Row="1" Grid.Column="0" Content="Publishers Count" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CloudProvider.PublishersCount}" />
-            <Label Grid.Row="2" Grid.Column="0" Content="Subscribers Count"  />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CloudProvider.SubscribersCount}"  />
+            <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding ConfigurationFile.ProviderType}" ItemsSource="{Binding Providers}" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Simulation Mode" />
+            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding ConfigurationFile.ApplicationMode}" ItemsSource="{Binding ApplicationModes}" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Nodes Count"  />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ConfigurationFile.NodesCount}"  />
             <Label Grid.Row="3" Grid.Column="0" Content="Base Url"  />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CloudProvider.BaseAddress}"  />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ConfigurationFile.BaseUrl}"  />
         </Grid>
     </DockPanel>
 </UserControl>

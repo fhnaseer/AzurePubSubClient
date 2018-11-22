@@ -9,7 +9,7 @@ namespace PubSub.Application.ViewModels
         private CloudContext _cloudContext;
         public CloudContext CloudContext
         {
-            get => _cloudContext ?? (_cloudContext = new CloudContext("http://localhost:7071"));
+            get => _cloudContext ?? (_cloudContext = new CloudContext("https://0achmjvzf2.execute-api.eu-central-1.amazonaws.com/pubsub/csharp"));
             set => _cloudContext = value;
         }
 

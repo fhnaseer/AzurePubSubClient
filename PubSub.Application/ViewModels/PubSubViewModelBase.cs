@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using PubSub.Model;
 using PubSub.Model.Functions;
@@ -8,13 +7,16 @@ namespace PubSub.Application.ViewModels
 {
     public abstract class PubSubViewModelBase : ViewModelBase
     {
-        protected CloudProviderMetadata CloudProvider { get; }
+        protected ConfigurationFile ConfigurationFile { get; }
 
-        protected PubSubViewModelBase(CloudProviderMetadata cloudProvider)
+        protected PubSubViewModelBase(ConfigurationFile configurationFile)
         {
-            CloudProvider = cloudProvider;
-            CloudContext = new CloudContext(CloudProvider.BaseAddress);
+            ConfigurationFile = configurationFile;
+            CloudContext = new CloudContext(ConfigurationFile.BaseUrl);
         }
+
+        private readonly string _baseAddress = "http://localhost:7071";
+        public string BaseAddress => ConfigurationFile == null ? _baseAddress : ConfigurationFile.BaseUrl;
 
         private ObservableCollection<ServerlessFunctionBase> _functions;
         public ObservableCollection<ServerlessFunctionBase> Functions => _functions ?? (_functions = new ObservableCollection<ServerlessFunctionBase>());
@@ -35,20 +37,6 @@ namespace PubSub.Application.ViewModels
 
         internal bool CanExecuteFunction() { return SelectedFunction != null; }
 
-        public virtual async void ExecuteFunction()
-        {
-            var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
-            AppendText(response);
-        }
-
-        private readonly StringBuilder _messageResponses = new StringBuilder();
-
-        public string MessageResponses => _messageResponses.ToString();
-
-        public void AppendText(string nextLine)
-        {
-            _messageResponses.AppendLine(nextLine);
-            OnPropertyChanged(nameof(MessageResponses));
-        }
+        public abstract void ExecuteFunction();
     }
 }

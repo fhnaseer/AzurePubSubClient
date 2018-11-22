@@ -1,35 +1,62 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Amazon;
+using Amazon.Runtime;
+using Amazon.SQS;
+using Microsoft.ServiceBus;
 using PubSub.Model;
 
 namespace PubSub.Application.ViewModels
 {
     public class CloudProviderViewModel : ViewModelBase
     {
-        private ObservableCollection<CloudProvider> _providers;
-        public ObservableCollection<CloudProvider> Providers => _providers ?? (_providers = new ObservableCollection<CloudProvider>(new[] { Model.CloudProvider.Azure, Model.CloudProvider.Aws }));
+        private ObservableCollection<ProviderType> _providers;
+        public ObservableCollection<ProviderType> Providers => _providers ?? (_providers = new ObservableCollection<ProviderType>(new[] { ProviderType.Aws, ProviderType.Azure }));
 
-        private CloudProviderMetadata _cloudProvider;
-        public CloudProviderMetadata CloudProvider
+        private ObservableCollection<ApplicationMode> _applicationModes;
+        public ObservableCollection<ApplicationMode> ApplicationModes => _applicationModes ?? (_applicationModes = new ObservableCollection<ApplicationMode>(new[] { ApplicationMode.Subscriber, ApplicationMode.Publisher}));
+
+        private ConfigurationFile _configurationFile;
+        public ConfigurationFile ConfigurationFile
         {
-            get => _cloudProvider ?? (_cloudProvider = new CloudProviderMetadata { BaseAddress = "http://localhost:7071", PublishersCount = 1, SubscribersCount = 1 });
+            get => _configurationFile ?? (_configurationFile = new ConfigurationFile { ProviderType = ProviderType.Aws, ApplicationMode = ApplicationMode.Subscriber, BaseUrl = "https://0achmjvzf2.execute-api.eu-central-1.amazonaws.com/pubsub/csharp", NodesCount = 1});
             set
             {
-                _cloudProvider = value;
-                OnPropertyChanged(nameof(CloudProvider));
+                _configurationFile = value;
+                OnPropertyChanged(nameof(ConfigurationFile));
             }
         }
 
         private ICommand _launchServerlessCommand;
         public ICommand LaunchServerlessCommand => _launchServerlessCommand ?? (_launchServerlessCommand = new RelayCommand(LaunchServerless, CanLaunchServerless));
 
-        internal bool CanLaunchServerless() { return CloudProvider.BaseAddress != null && CloudProvider.PublishersCount != 0 && CloudProvider.SubscribersCount != 0; }
+        internal bool CanLaunchServerless() { return ConfigurationFile.BaseUrl != null && ConfigurationFile.NodesCount != 0; }
 
         internal void LaunchServerless()
         {
             var window = new MainWindow();
-            window.DataContext = new HomeViewModel(CloudProvider);
+            if (ConfigurationFile.ApplicationMode == ApplicationMode.Subscriber)
+                window.DataContext = new SubscriberViewModel(ConfigurationFile);
+            else
+                window.DataContext = new PublisherViewModel(ConfigurationFile);
             window.Show();
+        }
+
+        private ICommand _clearResourcesCommand;
+        public ICommand ClearResourcesCommand => _clearResourcesCommand ?? (_clearResourcesCommand = new RelayCommand(ClearResources));
+
+        internal async void ClearResources()
+        {
+            var credentials = new BasicAWSCredentials("AKIAIKBFSSFHFA3EMXAA", "gZu7M14AufPLtGqP/NZjfySOHk6r5mqYzwyBfW9f");
+            var amazonClient = new AmazonSQSClient(credentials, RegionEndpoint.EUCentral1);
+            var sqsResponse = amazonClient.ListQueues("subscriber");
+            foreach (var url in sqsResponse.QueueUrls)
+                amazonClient.DeleteQueueAsync(url);
+
+            var manager = NamespaceManager.CreateFromConnectionString("Endpoint=sb://serverlessservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=lj8a0ng7f4KwQPizDEAcSAuxzt95su6RUb/wQ1Q9+k4=");
+            var queues = await manager.GetQueuesAsync();
+            foreach (var queueDescription in queues)
+                manager.DeleteQueue(queueDescription.Path);
         }
     }
 }

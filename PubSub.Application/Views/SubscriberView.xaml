@@ -9,26 +9,48 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <viewModels:AzureSubscriberViewModel />
+        <viewModels:SubscriberViewModel />
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary Source="../ResourceDictionary.xaml" />
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Top">
-            <DockPanel DockPanel.Dock="Top">
-                <TextBlock Text="Subscriber Id" />
-                <TextBox Text="{Binding Subscriber.SubscriberId}" />
-            </DockPanel>
-            <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
-            <DockPanel DockPanel.Dock="Top">
-                <TextBlock Text="Sample Input" />
-                <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" />
-            </DockPanel>
-            <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Function" />
-        </StackPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Base Url" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding BaseAddress}" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Subscribers" />
+            <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Subscribers}" SelectedItem="{Binding SelectedSubscriber}" DisplayMemberPath="SubscriberId"/>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Subscriber Id" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedSubscriber.SubscriberId}" />
+        </Grid>
+        <GroupBox Header="Functions" DockPanel.Dock="Top" Margin="10">
+            <StackPanel>
+                <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Sample Input" />
+                    <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height="75" />
+                </DockPanel>
+                <UniformGrid Columns="3">
+                    <RadioButton IsChecked="{Binding AllSubscribers}" Content="For All Subscribers" />
+                    <RadioButton IsChecked="{Binding SelectedSubscriberOnly}" Content="For Selected Subscriber" />
+                    <Label/>
+                    <Button Content="Register Subscriber" Command="{Binding RegisterSubscribersCommand}"/>
+                    <Button Content="Unregister Subscriber" Command="{Binding UnregisterSubscribersCommand}" />
+                    <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Selected Function" />
+                </UniformGrid>
+            </StackPanel>
+        </GroupBox>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding MessageResponses}" TextWrapping="Wrap" />
+            <TextBlock Width="{Binding ElementName=Scroller, Path=ViewportWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding SelectedSubscriber.MessageResponses}" TextWrapping="Wrap" />
         </ScrollViewer>
     </DockPanel>
 </UserControl>

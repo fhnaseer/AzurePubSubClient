@@ -1,25 +1,37 @@
-﻿namespace PubSub.Model
+﻿using Newtonsoft.Json;
+
+namespace PubSub.Model
 {
-    public enum CloudProvider
+    public enum ProviderType
     {
         Azure,
         Aws
     }
 
-    public class CloudProviderMetadata
+    public enum ApplicationMode
     {
-        public CloudProvider CloudProvider { get; set; }
+        Subscriber,
+        Publisher,
+        Mixed,
+    }
 
-        public int PublishersCount { get; set; }
-
-        public int SubscribersCount { get; set; }
-
-        private string _baseAddress;
-
-        public string BaseAddress
+    public class ConfigurationFile
+    {
+        private string _baseUrl;
+        [JsonProperty("baseUrl")]
+        public string BaseUrl
         {
-            get => _baseAddress?.Trim();
-            set => _baseAddress = value;
+            get => _baseUrl?.Trim();
+            set => _baseUrl = value;
         }
+
+        [JsonProperty("providerType")]
+        public ProviderType ProviderType { get; set; }
+
+        [JsonProperty("applicationMode")]
+        public ApplicationMode ApplicationMode { get; set; }
+
+        [JsonProperty("nodesCount")]
+        public int NodesCount { get; set; }
     }
 }

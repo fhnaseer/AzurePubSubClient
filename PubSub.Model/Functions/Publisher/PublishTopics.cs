@@ -16,8 +16,8 @@ namespace PubSub.Model.Functions.Publisher
         private MessageBase _sampleMessageInput;
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new TopicsInput
         {
-            Message = "Some message,",
-            Topics = new List<string> { "computer", "science" }
+            Message = "This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random,",
+            Topics = new List<string> { "computer" }
         });
     }
 }
