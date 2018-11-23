@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
 using Amazon.SQS;
 using Microsoft.ServiceBus;
@@ -52,6 +54,17 @@ namespace PubSub.Application.ViewModels
             var sqsResponse = amazonClient.ListQueues("subscriber");
             foreach (var url in sqsResponse.QueueUrls)
                 amazonClient.DeleteQueueAsync(url);
+
+            var dbClient = new AmazonDynamoDBClient(credentials, RegionEndpoint.EUCentral1);
+            var response = dbClient.DescribeTable("topics");
+            dbClient.DeleteTable("topics");
+            dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
+            response = dbClient.DescribeTable("content");
+            dbClient.DeleteTable("content");
+            dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
+            response = dbClient.DescribeTable("functions");
+            dbClient.DeleteTable("functions");
+            dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
 
             var manager = NamespaceManager.CreateFromConnectionString("Endpoint=sb://serverlessservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=lj8a0ng7f4KwQPizDEAcSAuxzt95su6RUb/wQ1Q9+k4=");
             var queues = await manager.GetQueuesAsync();
