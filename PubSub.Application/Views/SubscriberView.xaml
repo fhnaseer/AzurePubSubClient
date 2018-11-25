@@ -39,12 +39,11 @@
                     <TextBlock Text="Sample Input" />
                     <TextBox Text="{Binding SampleMessageInput}" TextWrapping="WrapWithOverflow" Height="75" />
                 </DockPanel>
-                <UniformGrid Columns="3">
+                <UniformGrid Columns="2">
                     <RadioButton IsChecked="{Binding AllSubscribers}" Content="For All Subscribers" />
                     <RadioButton IsChecked="{Binding SelectedSubscriberOnly}" Content="For Selected Subscriber" />
-                    <Label/>
                     <Button Content="Register Subscriber" Command="{Binding RegisterSubscribersCommand}"/>
-                    <Button Content="Unregister Subscriber" Command="{Binding UnregisterSubscribersCommand}" />
+                    <!--<Button Content="Unregister Subscriber" Command="{Binding UnregisterSubscribersCommand}" />-->
                     <Button Command="{Binding ExecuteFunctionCommand}" Content="Execute Selected Function" />
                 </UniformGrid>
             </StackPanel>

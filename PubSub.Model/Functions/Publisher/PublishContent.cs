@@ -9,7 +9,7 @@ namespace PubSub.Model.Functions.Publisher
         {
         }
 
-        public override string Name => "Publish Content,";
+        public override string Name => "Publish Content";
 
         protected override string FunctionRelativeAddress => "publishcontent";
 
@@ -17,7 +17,7 @@ namespace PubSub.Model.Functions.Publisher
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "PubSub.Model.Responses.ContentsInput.set_Message(System.String)")]
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new ContentsInput
         {
-            Message = "Some message,",
+            Message = "Some message",
             Topics = new List<KeyValueContent>
             {
                 new KeyValueContent { Key = "computer", Value = "intel"},

@@ -9,14 +9,14 @@ namespace PubSub.Model.Functions.Publisher
         {
         }
 
-        public override string Name => "Publish Topics,";
+        public override string Name => "Publish Topics";
 
         protected override string FunctionRelativeAddress => "publishtopic";
 
         private MessageBase _sampleMessageInput;
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new TopicsInput
         {
-            Message = "This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random,",
+            Message = "This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random string. This is some random.",
             Topics = new List<string> { "computer" }
         });
     }

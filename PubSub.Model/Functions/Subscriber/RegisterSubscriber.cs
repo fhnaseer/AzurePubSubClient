@@ -9,7 +9,7 @@ namespace PubSub.Model.Functions.Subscriber
         {
         }
 
-        public override string Name => "Register Subscriber,";
+        public override string Name => "Register Subscriber";
 
         protected override string FunctionRelativeAddress => "subscribe";
 

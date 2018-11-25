@@ -9,7 +9,7 @@ namespace PubSub.Model.Functions.Subscriber
         {
         }
 
-        public override string Name => "Subscribe Function,";
+        public override string Name => "Subscribe Function";
 
         protected override string FunctionRelativeAddress => "subscribefunction";
 
@@ -17,9 +17,9 @@ namespace PubSub.Model.Functions.Subscriber
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new FunctionInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
-            SubscriptionType = "Text",
-            MatchingInputs = "index",
-            MatchingFunction = "let populations = {'New Zealand': 4693000, 'Germany': 8267000}; return populations[index];"
+            SubscriptionType = "Language",
+            FunctionType = "url",
+            MatchingFunction = "api/DetectLanguages"
         });
     }
 }

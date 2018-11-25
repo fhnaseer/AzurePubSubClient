@@ -9,14 +9,14 @@ namespace PubSub.Model.Functions.Publisher
         {
         }
 
-        public override string Name => "Publish Function,";
+        public override string Name => "Publish Function";
 
         protected override string FunctionRelativeAddress => "publishfunction";
 
         public override MessageBase SampleMessageInput => new FunctionInput
         {
-            Message = "Germany",
-            SubscriptionType = "Text",
+            Message = "Some random text",
+            SubscriptionType = "Language",
         };
     }
 }

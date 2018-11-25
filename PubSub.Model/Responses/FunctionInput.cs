@@ -10,6 +10,9 @@ namespace PubSub.Model.Responses
         [JsonProperty("matchingInputs")]
         public string MatchingInputs { get; set; }
 
+        [JsonProperty("functionType")]
+        public string FunctionType { get; set; }
+
         [JsonProperty("matchingFunction")]
         public string MatchingFunction { get; set; }
     }

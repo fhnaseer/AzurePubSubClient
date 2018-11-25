@@ -35,17 +35,17 @@ namespace PubSub.Application.BrokerEntities
                 var response = await _amazonClient.ReceiveMessageAsync(request);
                 foreach (var message in response.Messages)
                 {
-                    var currentTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    //var currentTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     var json = JObject.Parse(message.Body);
-                    var fromPublisher = Convert.ToDateTime(json["fromPublisher"]);
-                    var functionInvoked = Convert.ToDateTime(json["functionInvoked"]);
-                    var databaseAccessed = Convert.ToDateTime(json["databaseAccessed"]);
-                    var current = Convert.ToDateTime(currentTime);
-                    var serverlessInvoked = (functionInvoked - fromPublisher).TotalMilliseconds;
-                    var database = (databaseAccessed - functionInvoked).TotalMilliseconds;
-                    var received = (current - databaseAccessed).TotalMilliseconds;
-                    var total = (current - fromPublisher).TotalMilliseconds;
-                    AppendText($"Total Time: {total} Function Invoked: {serverlessInvoked}, Database: {database}, Received: {received}, Message: {total}");
+                    //var fromPublisher = Convert.ToDateTime(json["fromPublisher"]);
+                    //var functionInvoked = Convert.ToDateTime(json["functionInvoked"]);
+                    //var databaseAccessed = Convert.ToDateTime(json["databaseAccessed"]);
+                    //var current = Convert.ToDateTime(currentTime);
+                    //var serverlessInvoked = (functionInvoked - fromPublisher).TotalMilliseconds;
+                    //var database = (databaseAccessed - functionInvoked).TotalMilliseconds;
+                    //var received = (current - databaseAccessed).TotalMilliseconds;
+                    //var total = (current - fromPublisher).TotalMilliseconds;
+                    AppendText($"Message: {json["message"]}");
                     _amazonClient.DeleteMessageAsync(SubscribeResponse.QueueUrl, message.ReceiptHandle);
                 }
             }
