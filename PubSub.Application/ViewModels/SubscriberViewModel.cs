@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
+using Newtonsoft.Json.Linq;
 using PubSub.Application.BrokerEntities;
 using PubSub.Model;
 
@@ -31,7 +33,7 @@ namespace PubSub.Application.ViewModels
         private Subscriber _selectedSubscriber;
         public Subscriber SelectedSubscriber
         {
-            get => _selectedSubscriber;
+            get => _selectedSubscriber ?? (_selectedSubscriber = Subscribers.FirstOrDefault());
             set
             {
                 _selectedSubscriber = value;
@@ -90,14 +92,16 @@ namespace PubSub.Application.ViewModels
             if (AllSubscribers)
                 foreach (var subscriber in Subscribers)
                 {
-                    SelectedFunction.SampleMessageInput.SubscriberId = subscriber.SubscriberId;
-                    var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
+                    var messageInput = JObject.Parse(SampleMessageInput);
+                    messageInput["SubscriberId"] = subscriber.SubscriberId;
+                    var response = await SelectedFunction.ExecuteFunction(messageInput);
                     subscriber.AppendText(response);
                 }
             else
             {
-                SelectedFunction.SampleMessageInput.SubscriberId = SelectedSubscriber.SubscriberId;
-                var response = await SelectedFunction.ExecuteFunction(SelectedFunction.SampleMessageInput);
+                var messageInput = JObject.Parse(SampleMessageInput);
+                messageInput["SubscriberId"] = SelectedSubscriber.SubscriberId;
+                var response = await SelectedFunction.ExecuteFunction(messageInput);
                 SelectedSubscriber.AppendText(response);
             }
         }

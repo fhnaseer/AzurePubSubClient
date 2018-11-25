@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using PubSub.Application.BrokerEntities;
 using PubSub.Model;
 
@@ -25,9 +26,9 @@ namespace PubSub.Application.ViewModels
         public override async void ExecuteFunction()
         {
             var taskList = new List<Task>();
-            var message = SelectedFunction.SampleMessageInput;
+            var message = JObject.Parse(SampleMessageInput);
             var startTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            message.FromPublisher = startTime;
+            message["FromPublisher"] = startTime;
             for (var i = 0; i < PublicationsCount; i++)
                 taskList.Add(SelectedFunction.ExecuteFunction(message));
 

@@ -29,6 +29,19 @@ namespace PubSub.Application.ViewModels
             {
                 _selectedFunction = value;
                 OnPropertyChanged(nameof(SelectedFunction));
+                _sampleMessageInput = _selectedFunction.SampleMessageInput.ToString();
+                OnPropertyChanged(nameof(SampleMessageInput));
+            }
+        }
+
+        private string _sampleMessageInput;
+        public string SampleMessageInput
+        {
+            get => _sampleMessageInput;
+            set
+            {
+                _sampleMessageInput = value;
+                OnPropertyChanged(nameof(SampleMessageInput));
             }
         }
 

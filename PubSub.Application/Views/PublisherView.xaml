@@ -35,7 +35,7 @@
                 <ComboBox ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunction}" DisplayMemberPath="Name"/>
                 <DockPanel DockPanel.Dock="Top">
                     <TextBlock Text="Sample Input" />
-                    <TextBox Text="{Binding SelectedFunction.SampleMessageInput, Mode=OneWay}" TextWrapping="WrapWithOverflow" Height="75" />
+                    <TextBox Text="{Binding SampleMessageInput}" TextWrapping="WrapWithOverflow" Height="75" />
                 </DockPanel>
                 <Button Command="{Binding ExecuteFunctionCommand}" Content="Send Publication" />
             </StackPanel>
