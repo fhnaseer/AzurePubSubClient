@@ -15,10 +15,6 @@ namespace PubSub.Application.BrokerEntities
             set => SubscribeResponse.SubscriberId = value;
         }
 
-        private readonly StringBuilder _messageResponses = new StringBuilder();
-
-        public string MessageResponses => _messageResponses.ToString();
-
         public abstract void SetupMessageQueue();
 
         internal async void RegisterSubscriber()

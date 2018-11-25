@@ -14,7 +14,8 @@ namespace PubSub.Model.Functions.Subscriber
 
         protected override string FunctionRelativeAddress => "subscribecontent";
 
-        public override MessageBase SampleMessageInput => new ContentsInput
+        private MessageBase _sampleMessageInput;
+        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new ContentsInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
             Topics = new List<KeyValueContent>
@@ -22,6 +23,6 @@ namespace PubSub.Model.Functions.Subscriber
                 new KeyValueContent { Key = "computer", Value = "intel", Condition = "="},
                 new KeyValueContent { Key = "money", Value = "500", Condition = ">="}
             }
-        };
+        });
     }
 }

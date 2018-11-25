@@ -13,12 +13,13 @@ namespace PubSub.Model.Functions.Subscriber
 
         protected override string FunctionRelativeAddress => "subscribefunction";
 
-        public override MessageBase SampleMessageInput => new FunctionInput
+        private MessageBase _sampleMessageInput;
+        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new FunctionInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
             SubscriptionType = "Text",
             MatchingInputs = "index",
             MatchingFunction = "let populations = {'New Zealand': 4693000, 'Germany': 8267000}; return populations[index];"
-        };
+        });
     }
 }

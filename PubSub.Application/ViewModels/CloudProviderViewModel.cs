@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using Amazon;
 using Amazon.DynamoDBv2;
@@ -56,20 +59,34 @@ namespace PubSub.Application.ViewModels
                 amazonClient.DeleteQueueAsync(url);
 
             var dbClient = new AmazonDynamoDBClient(credentials, RegionEndpoint.EUCentral1);
-            var response = dbClient.DescribeTable("topics");
-            dbClient.DeleteTable("topics");
-            dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
-            response = dbClient.DescribeTable("content");
-            dbClient.DeleteTable("content");
-            dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
-            response = dbClient.DescribeTable("functions");
-            dbClient.DeleteTable("functions");
-            dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
+            ClearDynamoDbTable(dbClient, "topics");
+            ClearDynamoDbTable(dbClient, "content");
+            ClearDynamoDbTable(dbClient, "functions");
 
             var manager = NamespaceManager.CreateFromConnectionString("Endpoint=sb://serverlessservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=lj8a0ng7f4KwQPizDEAcSAuxzt95su6RUb/wQ1Q9+k4=");
             var queues = await manager.GetQueuesAsync();
             foreach (var queueDescription in queues)
                 manager.DeleteQueue(queueDescription.Path);
+
+            MessageBox.Show("Resources Clear");
+        }
+
+        private static async void ClearDynamoDbTable(AmazonDynamoDBClient dbClient, string tableName)
+        {
+            var response = dbClient.DescribeTable(tableName);
+            await dbClient.DeleteTableAsync(tableName);
+            do
+            {
+                try
+                {
+                    dbClient.CreateTable(response.Table.TableName, response.Table.KeySchema, response.Table.AttributeDefinitions, new ProvisionedThroughput(100, 5));
+                    return;
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(3000);
+                }
+            } while (true);
         }
     }
 }
