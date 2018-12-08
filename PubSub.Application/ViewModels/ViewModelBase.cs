@@ -6,12 +6,7 @@ namespace PubSub.Application.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        private CloudContext _cloudContext;
-        public CloudContext CloudContext
-        {
-            get => _cloudContext ?? (_cloudContext = new CloudContext("https://0achmjvzf2.execute-api.eu-central-1.amazonaws.com/pubsub/csharp"));
-            set => _cloudContext = value;
-        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

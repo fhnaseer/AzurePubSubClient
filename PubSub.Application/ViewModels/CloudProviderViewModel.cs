@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -17,6 +18,20 @@ namespace PubSub.Application.ViewModels
     {
         private ObservableCollection<ProviderType> _providers;
         public ObservableCollection<ProviderType> Providers => _providers ?? (_providers = new ObservableCollection<ProviderType>(new[] { ProviderType.Aws, ProviderType.Azure }));
+
+        public ProviderType SelectedProvider
+        {
+            get => ConfigurationFile.ProviderType;
+            set  {
+                ConfigurationFile.ProviderType = value;
+                if (ConfigurationFile.ProviderType == ProviderType.Aws)
+                ConfigurationFile.BaseUrl = "https://0achmjvzf2.execute-api.eu-central-1.amazonaws.com/pubsub/csharp";
+                else
+                    ConfigurationFile.BaseUrl = "http://localhost:7071";
+                OnPropertyChanged(nameof(ConfigurationFile));
+                OnPropertyChanged(nameof(SelectedProvider));
+            }
+        }
 
         private ObservableCollection<ApplicationMode> _applicationModes;
         public ObservableCollection<ApplicationMode> ApplicationModes => _applicationModes ?? (_applicationModes = new ObservableCollection<ApplicationMode>(new[] { ApplicationMode.Subscriber, ApplicationMode.Publisher}));

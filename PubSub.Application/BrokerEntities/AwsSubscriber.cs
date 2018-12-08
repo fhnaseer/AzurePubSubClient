@@ -4,11 +4,16 @@ using Amazon.Runtime;
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Newtonsoft.Json.Linq;
+using PubSub.Model;
 
 namespace PubSub.Application.BrokerEntities
 {
     public class AwsSubscriber : Subscriber
     {
+        public AwsSubscriber(CloudContext cloudContext) : base(cloudContext)
+        {
+        }
+
         private AmazonSQSClient _amazonClient;
 
         public override void SetupMessageQueue()
@@ -45,7 +50,7 @@ namespace PubSub.Application.BrokerEntities
                     //var database = (databaseAccessed - functionInvoked).TotalMilliseconds;
                     //var received = (current - databaseAccessed).TotalMilliseconds;
                     //var total = (current - fromPublisher).TotalMilliseconds;
-                    AppendText($"Message: {json["message"]}");
+                    AppendText($"Type: {json["type"]}, Message: {json["message"]}");
                     _amazonClient.DeleteMessageAsync(SubscribeResponse.QueueUrl, message.ReceiptHandle);
                 }
             }

@@ -18,6 +18,8 @@ namespace PubSub.Application.ViewModels
         private readonly string _baseAddress = "http://localhost:7071";
         public string BaseAddress => ConfigurationFile == null ? _baseAddress : ConfigurationFile.BaseUrl;
 
+        public CloudContext CloudContext { get; set; }
+
         private ObservableCollection<ServerlessFunctionBase> _functions;
         public ObservableCollection<ServerlessFunctionBase> Functions => _functions ?? (_functions = new ObservableCollection<ServerlessFunctionBase>());
 

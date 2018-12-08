@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Text;
 using Newtonsoft.Json;
+using PubSub.Model;
 using PubSub.Model.Responses;
 
 namespace PubSub.Application.BrokerEntities
 {
     public abstract class Subscriber : BrokerEntity
     {
+        public Subscriber(CloudContext cloudContext)
+        {
+            CloudContext = cloudContext;
+        }
+
+        public CloudContext CloudContext { get; private set; }
+
         public SubscribeResponse SubscribeResponse { get; set; }
 
         public string SubscriberId

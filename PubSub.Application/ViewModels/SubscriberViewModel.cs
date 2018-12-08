@@ -14,9 +14,9 @@ namespace PubSub.Application.ViewModels
             for (var i = 0; i < configurationFile.NodesCount; i++)
             {
                 if (configurationFile.ProviderType == ProviderType.Azure)
-                    Subscribers.Add(new AzureSubscriber());
+                    Subscribers.Add(new AzureSubscriber(CloudContext));
                 else
-                    Subscribers.Add(new AwsSubscriber());
+                    Subscribers.Add(new AwsSubscriber(CloudContext));
             }
 
             Functions.Clear();
