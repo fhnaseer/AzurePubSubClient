@@ -15,8 +15,7 @@ namespace PubSub.Model.Functions.Publisher
 
         public override MessageBase SampleMessageInput => new FunctionInput
         {
-            Message = "Some random text",
-            SubscriptionType = "Language",
+            Message = "Welcome",
         };
     }
 }

@@ -27,7 +27,7 @@ namespace PubSub.Application.ViewModels
                 if (ConfigurationFile.ProviderType == ProviderType.Aws)
                 ConfigurationFile.BaseUrl = "https://0achmjvzf2.execute-api.eu-central-1.amazonaws.com/pubsub/csharp";
                 else
-                    ConfigurationFile.BaseUrl = "http://localhost:7071";
+                    ConfigurationFile.BaseUrl = "https://pubsubcs.azurewebsites.net";
                 OnPropertyChanged(nameof(ConfigurationFile));
                 OnPropertyChanged(nameof(SelectedProvider));
             }

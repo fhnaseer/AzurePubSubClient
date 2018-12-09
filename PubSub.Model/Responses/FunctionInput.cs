@@ -7,9 +7,6 @@ namespace PubSub.Model.Responses
         [JsonProperty("subscriptionType")]
         public string SubscriptionType { get; set; }
 
-        [JsonProperty("matchingInputs")]
-        public string MatchingInputs { get; set; }
-
         [JsonProperty("functionType")]
         public string FunctionType { get; set; }
 

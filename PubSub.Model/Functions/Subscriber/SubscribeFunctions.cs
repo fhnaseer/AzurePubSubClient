@@ -17,9 +17,9 @@ namespace PubSub.Model.Functions.Subscriber
         public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new FunctionInput
         {
             SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
-            SubscriptionType = "Language",
+            SubscriptionType = "English",
             FunctionType = "url",
-            MatchingFunction = "api/DetectLanguages"
+            MatchingFunction = "http://pubssubfunctions.azurewebsites.net"
         });
     }
 }
