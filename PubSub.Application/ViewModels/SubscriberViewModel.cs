@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using PubSub.Application.BrokerEntities;
 using PubSub.Model;
+using PubSub.Model.Functions.Subscriber;
 
 namespace PubSub.Application.ViewModels
 {
@@ -95,14 +96,25 @@ namespace PubSub.Application.ViewModels
                     var messageInput = JObject.Parse(SampleMessageInput);
                     messageInput["SubscriberId"] = subscriber.SubscriberId;
                     var response = await SelectedFunction.ExecuteFunction(messageInput);
-                    subscriber.AppendText(response);
+                    if (SelectedFunction is SubscribeTopic)
+                        subscriber.AppendText($"Subscribed to Topics: {messageInput["topics"]}");
+                    else if (SelectedFunction is SubscribeContent)
+                        subscriber.AppendText($"Subscribed to Contents: {messageInput["content"]}");
+                    else
+                        subscriber.AppendText($"Subscribed to Function: {messageInput["matchingFunction"]}");
+
                 }
             else
             {
                 var messageInput = JObject.Parse(SampleMessageInput);
                 messageInput["SubscriberId"] = SelectedSubscriber.SubscriberId;
                 var response = await SelectedFunction.ExecuteFunction(messageInput);
-                SelectedSubscriber.AppendText(response);
+                if (SelectedFunction is SubscribeTopic)
+                    SelectedSubscriber.AppendText($"Subscribed to Topics: {messageInput["topics"]}");
+                else if (SelectedFunction is SubscribeContent)
+                    SelectedSubscriber.AppendText($"Subscribed to Contents: {messageInput["content"]}");
+                else
+                    SelectedSubscriber.AppendText($"Subscribed to Function: {messageInput["matchingFunction"]}");
             }
         }
     }

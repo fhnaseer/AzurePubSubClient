@@ -13,7 +13,7 @@ namespace PubSub.Model.Functions.Publisher
 
         protected override string FunctionRelativeAddress => "publishfunction";
 
-        public override MessageBase SampleMessageInput => new FunctionInput
+        public override MessageBase SampleMessageInput => new PublishFunctionInput
         {
             Message = "Welcome",
         };

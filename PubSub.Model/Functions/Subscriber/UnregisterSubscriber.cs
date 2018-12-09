@@ -15,7 +15,7 @@ namespace PubSub.Model.Functions.Subscriber
 
         public override MessageBase SampleMessageInput => new UnregisterSubscriberInput
         {
-            SubscriberId = "subscriber32"
+            SubscriberId = ""
         };
     }
 }

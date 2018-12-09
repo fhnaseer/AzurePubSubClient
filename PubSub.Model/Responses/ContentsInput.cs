@@ -3,7 +3,15 @@ using Newtonsoft.Json;
 
 namespace PubSub.Model.Responses
 {
-    public class ContentsInput : MessageBase
+    public class SubscribeContentsInput : SubscriberMessageBase
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [JsonProperty("content")]
+        public List<KeyValueContent> Topics { get; set; }
+    }
+
+    public class PublishContentsInput : PublisherMessageBase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]

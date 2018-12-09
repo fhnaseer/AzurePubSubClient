@@ -14,9 +14,8 @@ namespace PubSub.Model.Functions.Subscriber
         protected override string FunctionRelativeAddress => "subscribefunction";
 
         private MessageBase _sampleMessageInput;
-        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new FunctionInput
+        public override MessageBase SampleMessageInput => _sampleMessageInput ?? (_sampleMessageInput = new SubscribeFunctionInput
         {
-            SubscriberId = "subscriber043d4fa0518411e89a9d1bd8d0d9e684",
             SubscriptionType = "English",
             FunctionType = "url",
             MatchingFunction = "http://pubssubfunctions.azurewebsites.net"

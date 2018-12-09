@@ -42,8 +42,10 @@ namespace PubSub.Application.BrokerEntities
 
         internal async void UnregisterSubscriber()
         {
-            var message = CloudContext.UnregisterSubscriber.SampleMessageInput;
-            message.SubscriberId = SubscriberId;
+            var message = new UnregisterSubscriberInput
+            {
+                SubscriberId = SubscriberId
+            };
             var response = await CloudContext.UnregisterSubscriber.ExecuteFunction(message);
             AppendText(response);
         }

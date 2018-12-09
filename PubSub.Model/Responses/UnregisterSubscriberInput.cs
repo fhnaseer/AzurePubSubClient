@@ -1,6 +1,10 @@
-﻿namespace PubSub.Model.Responses
+﻿using Newtonsoft.Json;
+
+namespace PubSub.Model.Responses
 {
-    public class UnregisterSubscriberInput : MessageBase
+    public class UnregisterSubscriberInput : SubscriberMessageBase
     {
+        [JsonProperty("subscriberId")]
+        public string SubscriberId { get; set; }
     }
 }

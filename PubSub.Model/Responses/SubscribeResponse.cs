@@ -2,8 +2,11 @@
 
 namespace PubSub.Model.Responses
 {
-    public class SubscribeResponse : MessageBase
+    public class SubscribeResponse : SubscriberMessageBase
     {
+        [JsonProperty("subscriberId")]
+        public string SubscriberId { get; set; }
+
         [JsonProperty("connectionString")]
         public string ConnectionString { get; set; }
 

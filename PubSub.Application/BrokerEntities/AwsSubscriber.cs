@@ -1,5 +1,4 @@
-﻿using System;
-using Amazon;
+﻿using Amazon;
 using Amazon.Runtime;
 using Amazon.SQS;
 using Amazon.SQS.Model;

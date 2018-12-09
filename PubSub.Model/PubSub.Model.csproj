@@ -132,7 +132,9 @@
     <Compile Include="Responses\MessageBase.cs" />
     <Compile Include="Responses\ContentsInput.cs" />
     <Compile Include="Responses\FunctionInput.cs" />
+    <Compile Include="Responses\PublisherMessageBase.cs" />
     <Compile Include="Responses\SubscribeResponse.cs" />
+    <Compile Include="Responses\SubscriberMessageBase.cs" />
     <Compile Include="Responses\TopicsInput.cs" />
     <Compile Include="Functions\ServerlessFunctionBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
